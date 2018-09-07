@@ -20,11 +20,28 @@ class PaymentsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'FormPayments', 'Categories'],
-            'limit'=>1000
-        ];
-        $payments = $this->paginate($this->Payments);
+        $where = [];
+        $payments = [];
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $data = $this->request->getData();
+
+
+            $where["date_payment >="] = $this->dateDb($data['de'])." 00:00:00";
+            $where["date_payment <="] = $this->dateDb($data['ate'])." 23:59:59";
+
+            //debug($where);die;
+
+            $payments = $this->Payments->find()
+                ->contain(['Users', 'FormPayments', 'Categories'])
+                ->where($where);
+            //debug($payments);
+            $this->paginate = [
+                'limit'=>1000
+            ];
+            $payments = $this->paginate($payments);
+        }
 
         $this->set(compact('payments'));
     }

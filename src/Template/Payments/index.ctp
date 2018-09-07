@@ -7,6 +7,13 @@
 
 <div class="payments index large-12 medium-10 columns content">
     <h3><?= __('Payments') ?></h3>
+    <?=$this->Form->create()?>
+    De: <input type="text" name="de"> Até: <input type="text" name="ate">
+    <button type="submit">Enviar</button>
+    <?=$this->Form->end()?>
+    <?php
+    if(!empty($payments)):
+    ?>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -42,4 +49,7 @@
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
+    <?php
+    endif;
+    ?>
 </div>
