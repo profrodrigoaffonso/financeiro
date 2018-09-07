@@ -21,7 +21,8 @@ class PaymentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'FormPayments', 'Categories']
+            'contain' => ['Users', 'FormPayments', 'Categories'],
+            'limit'=>1000
         ];
         $payments = $this->paginate($this->Payments);
 
