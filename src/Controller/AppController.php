@@ -52,4 +52,32 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+
+        
+
+        $whiteList = [
+            'pages/display',
+            'users/add',
+            'users/login'
+        ];
+
+        $current_page = strtolower($this->request->getParam("controller")).'/'.$this->request->getParam("action");
+
+        if(!in_array($current_page, $whiteList)){
+            
+            $session = $this->request->getSession();
+
+            if(!$session->check("User")){
+                $this->Flash->error("Realize o login");
+                return $this->redirect(["controller"=>"users","action"=>"login"]);
+            }
+
+
+
+        }
+    }
 }
