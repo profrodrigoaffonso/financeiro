@@ -110,8 +110,7 @@ class UsersController extends AppController
 
     public function login()
     {
-
-
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             $data = $this->request->getData();
@@ -138,6 +137,18 @@ class UsersController extends AppController
         
 
         return $this->render("login","login");
+
+    }
+
+    public function logout()
+    {
+
+        $session = $this->request->getSession();
+
+        if($session->check("User")){
+            $session->delete("User");
+        }
+        return $this->redirect(["controller"=>"users","action"=>"login"]);
 
     }
 }

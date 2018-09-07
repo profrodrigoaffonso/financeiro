@@ -62,7 +62,8 @@ class AppController extends Controller
         $whiteList = [
             'pages/display',
             'users/add',
-            'users/login'
+            'users/login',
+            'users/logout'
         ];
 
         $current_page = strtolower($this->request->getParam("controller")).'/'.$this->request->getParam("action");
