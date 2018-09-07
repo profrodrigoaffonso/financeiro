@@ -111,6 +111,30 @@ class UsersController extends AppController
     public function login()
     {
 
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $data = $this->request->getData();
+
+            $user = $this->Users->find()
+                ->where([
+                    'password'=>Security::hash($data['password'], 'md5'),
+                    'OR'=>[
+                        ["login"=>$data['login']],
+                        ["email"=>$data['login']]
+                    ]
+                ])
+                ->first();
+            if($user){
+                $session = $this->request->getSession();
+                $session->write("User",$user);
+                return $this->redirect(["controller"=>"pages","action"=>"display","home"]);
+            }else{
+                $this->Flash->error("Usuário e/ou senha inválidos");
+                return $this->redirect(["controller"=>"users","action"=>"login"]);
+            }
+
+        }
         
 
         return $this->render("login","login");
