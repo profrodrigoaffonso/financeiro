@@ -44,6 +44,8 @@ class PaymentsController extends AppController
         }
 
         $this->set(compact('payments'));
+        $this->set("styles",["/jquery-ui/jquery-ui.min.css"]);
+        $this->set("scripts",["/jquery-ui/external/jquery/jquery.js","/jquery-ui/jquery-ui.min.js","/js/payment-index.js"]);
     }
 
     /**

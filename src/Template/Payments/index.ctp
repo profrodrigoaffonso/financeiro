@@ -8,7 +8,7 @@
 <div class="payments index large-12 medium-10 columns content">
     <h3><?= __('Payments') ?></h3>
     <?=$this->Form->create()?>
-    De: <input type="text" name="de"> Até: <input type="text" name="ate">
+    De: <input type="text" name="de" class="dt" autocomplete="off"> Até: <input type="text" name="ate" class="dt" autocomplete="off">
     <button type="submit">Enviar</button>
     <?=$this->Form->end()?>
     <?php
