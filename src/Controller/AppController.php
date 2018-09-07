@@ -63,6 +63,7 @@ class AppController extends Controller
             'pages/display',
             'users/add',
             'users/login',
+            'payments/pdf',
             'users/logout'
         ];
 
