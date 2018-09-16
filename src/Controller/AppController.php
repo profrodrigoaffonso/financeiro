@@ -64,10 +64,15 @@ class AppController extends Controller
             'users/add',
             'users/login',
             'payments/pdf',
-            'users/logout'
+            'users/logout',
+            'site/inserir',
+            'site/naoAutorizado'
         ];
 
+
         $current_page = strtolower($this->request->getParam("controller")).'/'.$this->request->getParam("action");
+
+        //die($current_page); 
 
         if(!in_array($current_page, $whiteList)){
             
@@ -85,5 +90,9 @@ class AppController extends Controller
 
     public function dateDb($date){
         return substr($date, 6, 4).'-'.substr($date, 3, 2).'-'.substr($date, 0, 2);
+    }
+
+    public function numberToDb($number){
+        return str_replace(",", ".", $number);
     }
 }

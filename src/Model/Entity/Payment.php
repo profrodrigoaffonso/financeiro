@@ -39,6 +39,9 @@ class Payment extends Entity
         'modified' => true,
         'user' => true,
         'form_payment' => true,
+        'date_payment' => true,
+        'hour_payment' => true,
+        'obs' => true,
         'category' => true
     ];
 }
