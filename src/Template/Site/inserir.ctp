@@ -1,6 +1,6 @@
 <div class="container">
 	<h1 class="text-center">Inserir valor</h1>
-	<?=$this->Form->create()?>
+	<?=$this->Form->create("payment")?>
 	  <div class="form-group">
 	  	<?=$this->Form->control("category_id",["options"=>$categories,"empty"=>true,"label"=>"Categoria","class"=>"form-control","required"])?>
 	  </div>
@@ -20,6 +20,7 @@
 	  	<?=$this->Form->control("obs",["type"=>"textarea", "label"=>"Obs","class"=>"form-control"])?>
 	  </div>
 	 
-	  <button type="submit" class="btn btn-default btn-primary" id="inserir">Submit</button>
+	  <button type="submit" class="btn btn-default btn-primary" id="inserir">Salvar</button>
 	<?=$this->Form->end();?>
+	<br><br><br><br>
 </div>

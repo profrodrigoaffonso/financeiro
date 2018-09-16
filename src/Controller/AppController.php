@@ -60,7 +60,6 @@ class AppController extends Controller
         
 
         $whiteList = [
-            'pages/display',
             'users/add',
             'users/login',
             'payments/pdf',
