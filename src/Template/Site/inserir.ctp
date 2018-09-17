@@ -1,6 +1,6 @@
 <div class="container">
 	<h1 class="text-center">Inserir valor</h1>
-	<?=$this->Form->create("payment")?>
+	<?=$this->Form->create("payment",["autocomplete"=>"off"])?>
 	  <div class="form-group">
 	  	<?=$this->Form->control("category_id",["options"=>$categories,"empty"=>true,"label"=>"Categoria","class"=>"form-control","required"])?>
 	  </div>

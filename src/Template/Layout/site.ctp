@@ -15,4 +15,5 @@
 </html>
 <script type="text/javascript" src="/jquery-ui/external/jquery/jquery.js"></script>
 <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/jquery.mask.js"></script>
 <script type="text/javascript" src="/js/inserir.js"></script>
