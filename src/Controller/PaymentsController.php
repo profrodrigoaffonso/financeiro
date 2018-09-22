@@ -80,6 +80,24 @@ class PaymentsController extends AppController
         $this->set("scripts",["/jquery-ui/external/jquery/jquery.js","/jquery-ui/jquery-ui.min.js","/js/payment-index.js"]);
     }
 
+    public function delFiles(){
+        $path = WWW_ROOT."excel/";
+
+        //$path = "arquivos/";
+        $diretorio = dir($path);
+         
+        //echo "Lista de Arquivos do diretório '<strong>".$path."</strong>':<br />";
+            while($arquivo = $diretorio -> read()){
+                if($arquivo!='.'&&$arquivo!='..'&&$arquivo!='empty'){
+                    echo "<a href='".$path.$arquivo."'>".$arquivo."</a><br />";
+                    unlink($path.$arquivo);
+                }
+
+            }
+        $diretorio -> close();
+        die;
+    }
+
 
     public function export()
     {
