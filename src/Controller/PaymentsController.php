@@ -136,6 +136,8 @@ class PaymentsController extends AppController
                 $file = WWW_ROOT."excel".DS.uniqid().".xlsx";
                 $writer->save($file);
 
+                unlink($file);
+
                 $response = $this->response->withFile(
                     $file,
                     ['download' => true, 'name' => 'Cadastro_export.xlsx']

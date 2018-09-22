@@ -1,14 +1,17 @@
-<div id="fullscreen_bg" class="fullscreen_bg"/>
-
 <div class="container">
 
-	<?=$this->Form->create("form",["class"=>"form-signin"])?>
-		<h1 class="form-signin-heading text-muted">Sign In</h1>
-		<input type="text" name="login" class="form-control" placeholder="Login" required="" autofocus="">
-		<input type="password" name="password" class="form-control" placeholder="Password" required="">
-		<button class="btn btn-lg btn-primary btn-block" type="submit">
-			Sign In
-		</button>
-	<?=$this->Form->end()?>
+  <?=$this->Form->create("form",["class"=>"form-signin"])?>
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text" name="login" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <!-- <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div> -->
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <?=$this->Form->end()?>
 
-</div>
+</div> <!-- /container -->

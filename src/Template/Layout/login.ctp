@@ -1,17 +1,27 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link href="/css/login.css" rel="stylesheet">
-<script src="/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-<?= $this->Flash->render() ?>
-<?= $this->fetch('content') ?>
+    <title>Signin Template for Bootstrap</title>
 
-</body>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/login.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <?= $this->Flash->render() ?>
+    <?= $this->fetch('content') ?>
+  </body>
 </html>
