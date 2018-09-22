@@ -8,6 +8,8 @@ use Dompdf\Options;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use Cake\Mailer\Email;
+
 
 /**
  * Payments Controller
@@ -95,6 +97,24 @@ class PaymentsController extends AppController
 
             }
         $diretorio -> close();
+        die;
+    }
+
+
+    public function sendEmail(){
+
+        $email = new Email();
+
+        $email->setFrom(["contato@profracosta.com.br" =>"Financeiro"])
+            ->setTransport('default')
+            ->setTo(trim('profrodrigoaffonso@gmail.com'))            
+            ->setSubject("Teste de layout")
+            ->setEmailFormat('html');
+
+
+        $email->send("teste");
+
+
         die;
     }
 
