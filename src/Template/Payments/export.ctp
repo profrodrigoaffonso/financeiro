@@ -1,11 +1,13 @@
-<div class="payments form large-9 medium-8 columns content">
+<div class="container">
+	<h3>Exportar</h3>
     <?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __('Export') ?></legend>
-        <?php
-            echo $this->Form->control('month', ['options' => $months, 'empty' => true]);
+    <div class="form-group">
+    	<?php
+            echo $this->Form->control('month', ['label'=>'Mês', 'class'=>'form-control', 'options' => $months, 'empty' => true]);
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+  	</div>    
+    <?= $this->Form->button(__('Submit'),["class"=>"btn btn-default"]) ?>
     <?= $this->Form->end() ?>
 </div>
+
+
