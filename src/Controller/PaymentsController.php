@@ -118,7 +118,7 @@ class PaymentsController extends AppController
                //echo $payment->category->name;
 
                 $sheet->setCellValueByColumnAndRow(1, $i, $payment->category->name);
-                $sheet->setCellValueByColumnAndRow(2, $i, $this->Number->format($payment->value));
+                $sheet->setCellValueByColumnAndRow(2, $i, $payment->value);
                 $sheet->setCellValueByColumnAndRow(3, $i, $payment->form_payment->name);
                 $sheet->setCellValueByColumnAndRow(4, $i, date("d/m/Y H:i", strtotime($payment->date_payment)));
                 $sheet->setCellValueByColumnAndRow(5, $i, $payment->obs);
