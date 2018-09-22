@@ -105,7 +105,7 @@ class PaymentsController extends AppController
 
         $email = new Email();
 
-        $email->setFrom(["contato@profracosta.com.br" =>"Financeiro"])
+        $email->setFrom(["contato@profracosta.com.br" =>"contato"])
             ->setTransport('default')
             ->setTo(trim('profrodrigoaffonso@gmail.com'))            
             ->setSubject("Teste de layout")
