@@ -91,11 +91,10 @@ class PaymentsController extends AppController
             $sheet = $spreadsheet->getActiveSheet();
 
             $sheet->setCellValueByColumnAndRow(1, 1, "Categoria");
-            $sheet->setCellValueByColumnAndRow(2, 1, "Categoria");
-            $sheet->setCellValueByColumnAndRow(3, 1, "Categoria");
-            $sheet->setCellValueByColumnAndRow(1, 2, "Categoria");
-            $sheet->setCellValueByColumnAndRow(2, 2, "Categoria");
-            $sheet->setCellValueByColumnAndRow(3, 2, "Categoria");
+            $sheet->setCellValueByColumnAndRow(2, 1, "Valor");
+            $sheet->setCellValueByColumnAndRow(3, 1, "Forma de pagamento");
+            $sheet->setCellValueByColumnAndRow(4, 1, "Data e hora");
+            $sheet->setCellValueByColumnAndRow(5, 1, "Obs");
 
 
             $data = $this->request->getData();
