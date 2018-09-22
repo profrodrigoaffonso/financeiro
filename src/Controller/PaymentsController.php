@@ -122,14 +122,18 @@ class PaymentsController extends AppController
     public function qrcode(){
 
         $session = $this->request->getSession();
+
+        $url = 'http://'.$_SERVER['HTTP_HOST'].'/site/inserir/'.$session->read("User")->uuid;
         
 
-        $qrCode = new QrCode('http://'.$_SERVER['HTTP_HOST'].'/site/inserir/'.$session->read("User")->uuid);
+        $qrCode = new QrCode($url);
 
-        header('Content-Type: '.$qrCode->getContentType());
-        echo $qrCode->writeString();
+        $arquivo = "qrcodes/".$session->read("User")->uuid.".png";
 
-        die;
+        $qrCode->writeFile(WWW_ROOT.$arquivo);
+
+      
+        $this->set(compact('url','arquivo'));
     }
 
 
