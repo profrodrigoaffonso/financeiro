@@ -9,6 +9,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use Cake\Mailer\Email;
+use Endroid\QrCode\QrCode;
 
 
 /**
@@ -114,6 +115,19 @@ class PaymentsController extends AppController
 
         $email->send("teste");
 
+
+        die;
+    }
+
+    public function qrcode(){
+
+        $session = $this->request->getSession();
+        
+
+        $qrCode = new QrCode('http://'.$_SERVER['HTTP_HOST'].'/site/inserir/'.$session->read("User")->uuid);
+
+        header('Content-Type: '.$qrCode->getContentType());
+        echo $qrCode->writeString();
 
         die;
     }

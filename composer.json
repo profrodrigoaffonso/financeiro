@@ -12,7 +12,8 @@
         "josegonzalez/dotenv": "3.*",
         "mobiledetect/mobiledetectlib": "2.*",
         "dompdf/dompdf": "0.8.2",
-        "phpoffice/phpspreadsheet":"@stable"
+        "phpoffice/phpspreadsheet":"@stable",
+        "endroid/qr-code":"3.4.4"
     },
     "require-dev": {
         "cakephp/bake": "^1.1",
