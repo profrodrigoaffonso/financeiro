@@ -108,7 +108,10 @@ class PaymentsController extends AppController
             $payments = $this->Payments->find()
                 ->contain(["Categories","FormPayments"])
                 ->where($where)
-                ->order(["date_payment"=>"ASC"]);
+                ->order([
+                    "Categories.name"=>"ASC",
+                    "date_payment"=>"ASC"
+                ]);
 
                 // debug($payments);
 
