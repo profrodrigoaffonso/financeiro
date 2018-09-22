@@ -5,6 +5,9 @@ use App\Controller\AppController;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 /**
  * Payments Controller
@@ -47,7 +50,9 @@ class PaymentsController extends AppController
      */
     public function index()
     {
+        $session = $this->request->getSession();
         $where = [];
+        $where['Payments.user_id'] = $session->read("User")->id;
         $payments = [];
 
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -73,6 +78,76 @@ class PaymentsController extends AppController
         $this->set(compact('payments'));
         $this->set("styles",["/jquery-ui/jquery-ui.min.css"]);
         $this->set("scripts",["/jquery-ui/external/jquery/jquery.js","/jquery-ui/jquery-ui.min.js","/js/payment-index.js"]);
+    }
+
+
+    public function export()
+    {
+        $session = $this->request->getSession();
+        
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+
+            $sheet->setCellValueByColumnAndRow(1, 1, "Categoria");
+            $sheet->setCellValueByColumnAndRow(2, 1, "Categoria");
+            $sheet->setCellValueByColumnAndRow(3, 1, "Categoria");
+            $sheet->setCellValueByColumnAndRow(1, 2, "Categoria");
+            $sheet->setCellValueByColumnAndRow(2, 2, "Categoria");
+            $sheet->setCellValueByColumnAndRow(3, 2, "Categoria");
+
+
+            $data = $this->request->getData();
+
+            $where = [];
+            $where['Payments.user_id'] = $session->read("User")->id;
+
+            $where['MONTH(date_payment)'] = $data['month'];
+
+            $payments = $this->Payments->find()
+                ->contain(["Categories","FormPayments"])
+                ->where($where)
+                ->order(["date_payment"=>"ASC"]);
+
+                // debug($payments);
+
+            foreach ($payments as $key => $payment) {
+                //debug($payment->category->name);
+               echo $payment->category->name;
+            }
+
+            $writer = new Xlsx($spreadsheet);
+
+                $file = WWW_ROOT."excel".DS.uniqid().".xlsx";
+                $writer->save($file);
+
+                $response = $this->response->withFile(
+                    $file,
+                    ['download' => true, 'name' => 'Cadastro_export.xlsx']
+                );
+
+                return $response;
+
+        }
+        $months = [
+            '1' => 'Janeiro',
+            '2' => 'Fevereiro',
+            '3' => 'Março',
+            '4' => 'Abril',
+            '5' => 'Maio',
+            '6' => 'Junho',
+            '7' => 'Julho',
+            '8' => 'Agosto',
+            '9' => 'Setembro',
+            '10' => 'Outubro',
+            '11' => 'Novembro',
+            '12' => 'Dezembro'
+        ];
+
+        //asort($months);
+
+        $this->set(compact('months'));
     }
 
     /**
