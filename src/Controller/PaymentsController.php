@@ -114,7 +114,7 @@ class PaymentsController extends AppController
 
             foreach ($payments as $key => $payment) {
                 //debug($payment->category->name);
-               echo $payment->category->name;
+               //echo $payment->category->name;
             }
 
             $writer = new Xlsx($spreadsheet);
