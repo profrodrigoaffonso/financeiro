@@ -93,8 +93,9 @@ class PaymentsController extends AppController
             $sheet->setCellValueByColumnAndRow(1, 1, "Categoria");
             $sheet->setCellValueByColumnAndRow(2, 1, "Valor");
             $sheet->setCellValueByColumnAndRow(3, 1, "Forma de pagamento");
-            $sheet->setCellValueByColumnAndRow(4, 1, "Data e hora");
-            $sheet->setCellValueByColumnAndRow(5, 1, "Obs");
+            $sheet->setCellValueByColumnAndRow(4, 1, "Data");
+            $sheet->setCellValueByColumnAndRow(5, 1, "Hora");
+            $sheet->setCellValueByColumnAndRow(6, 1, "Obs");
 
 
             $data = $this->request->getData();
@@ -120,8 +121,9 @@ class PaymentsController extends AppController
                 $sheet->setCellValueByColumnAndRow(1, $i, $payment->category->name);
                 $sheet->setCellValueByColumnAndRow(2, $i, $payment->value);
                 $sheet->setCellValueByColumnAndRow(3, $i, $payment->form_payment->name);
-                $sheet->setCellValueByColumnAndRow(4, $i, date("d/m/Y H:i", strtotime($payment->date_payment)));
-                $sheet->setCellValueByColumnAndRow(5, $i, $payment->obs);
+                $sheet->setCellValueByColumnAndRow(4, $i, date("d/m/Y", strtotime($payment->date_payment)));
+                $sheet->setCellValueByColumnAndRow(5, $i, date("H:i", strtotime($payment->date_payment)));
+                $sheet->setCellValueByColumnAndRow(6, $i, $payment->obs);
 
                 $i++;
             }
