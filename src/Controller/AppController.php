@@ -51,10 +51,6 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
-
-        $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
-
-        
     }
 
     public function beforeFilter(Event $event)
@@ -88,16 +84,6 @@ class AppController extends Controller
 
 
 
-        }
-    }
-
-    public function forceSSL(){
-        $this->request->addDetector('ssl', array(
-            'env' => 'HTTP_X_FORWARDED_PROTO',
-            'value' => 'https'
-        ));
-        if($_SERVER['HTTP_X_FORWARDED_PROTO'] == "http") {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->here); 
         }
     }
 
