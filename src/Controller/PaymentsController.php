@@ -104,19 +104,28 @@ class PaymentsController extends AppController
 
     public function sendEmail(){
 
+        $session = $this->request->getSession();
+
         $email = new Email();
 
         $email->setFrom(["contato@profracosta.com.br" =>"contato"])
             ->setTransport('default')
-            ->setTo(trim('profrodrigoaffonso@gmail.com'))            
-            ->setSubject("Teste de layout")
+            ->setTo(trim('profrodrigoaffonso@gmail.com','Rodrigo'))            
+            ->setSubject("Link do site")
             ->setEmailFormat('html');
 
+        $body = '<html>        
+        <body>
+        <img src="http://'.$_SERVER['HTTP_HOST'].'qrcodes/'.$session->read("User")->uuid.'.png">
+        <p>Ou clique</p>
+        <p>http://'.$_SERVER['HTTP_HOST'].'/site/inserir/'.$session->read("User")->uuid.'</p>
+        </body>
+        </html>';
 
-        $email->send("teste");
 
+        $email->send($body);
 
-        die;
+        $this->redirect(['action'=>'qrcode']);
     }
 
     public function qrcode(){
