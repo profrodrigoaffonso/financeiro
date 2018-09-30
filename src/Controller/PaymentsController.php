@@ -116,7 +116,7 @@ class PaymentsController extends AppController
 
         $body = '<html>        
         <body>
-        <img src="http://'.$_SERVER['HTTP_HOST'].'qrcodes/'.$session->read("User")->uuid.'.png">
+        <img src="http://'.$_SERVER['HTTP_HOST'].'/qrcodes/'.$session->read("User")->uuid.'.png">
         <p>Ou clique</p>
         <p>http://'.$_SERVER['HTTP_HOST'].'/site/inserir/'.$session->read("User")->uuid.'</p>
         </body>
