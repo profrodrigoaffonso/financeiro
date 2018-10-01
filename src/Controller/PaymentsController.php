@@ -205,7 +205,7 @@ class PaymentsController extends AppController
 
                 $response = $this->response->withFile(
                     $file,
-                    ['download' => true, 'name' => 'Cadastro_export.xlsx']
+                    ['download' => true, 'name' => 'Export.xlsx']
                 );
 
                 //unlink($file);
