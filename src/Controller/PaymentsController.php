@@ -182,6 +182,8 @@ class PaymentsController extends AppController
 
             $i = 2;
 
+            $cat_ant = 0;
+
             foreach ($payments as $key => $payment) {
                 //debug($payment->category->name);
                //echo $payment->category->name;
@@ -191,7 +193,7 @@ class PaymentsController extends AppController
                 $sheet->setCellValueByColumnAndRow(3, $i, $payment->form_payment->name);
                 $sheet->setCellValueByColumnAndRow(4, $i, date("d/m/Y", strtotime($payment->date_payment)));
                 $sheet->setCellValueByColumnAndRow(5, $i, date("H:i", strtotime($payment->date_payment)));
-                $sheet->setCellValueByColumnAndRow(6, $i, $payment->obs);
+                $sheet->setCellValueByColumnAndRow(6, $i, $payment->obs);              
 
                 $i++;
             }
