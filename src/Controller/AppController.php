@@ -45,6 +45,7 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
+        $this->loadComponent('Csrf');
 
         /*
          * Enable the following component for recommended CakePHP security settings.
@@ -55,43 +56,44 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        parent::beforeFilter($event);
+        parent::beforeFilter($event);        
 
-        
-
+        // paginas que não precisa de login
         $whiteList = [
             'users/add',
             'users/login',
+            'users/esqueci',
             'payments/pdf',
             'users/logout',
             'site/inserir',
-            'site/naoAutorizado'
+            'users/redefinirSenha',
+            'site/naoAutorizado',
+            'site/ajaxCalculo'
         ];
 
-
+        // verifica a página atual
         $current_page = strtolower($this->request->getParam("controller")).'/'.$this->request->getParam("action");
 
-        //die($current_page); 
-
+        // verifica se a página atual não pertence a whiteList
         if(!in_array($current_page, $whiteList)){
             
+            // caso não pertença verifica se o usuário está logado
             $session = $this->request->getSession();
 
             if(!$session->check("User")){
+                // se não estiver redireciona para a página de login
                 $this->Flash->error("Realize o login");
                 return $this->redirect(["controller"=>"users","action"=>"login"]);
             }
 
-
-
         }
     }
 
-    public function dateDb($date){
+    public function dateDb($date){ // formata a data para inserir no banco de dados
         return substr($date, 6, 4).'-'.substr($date, 3, 2).'-'.substr($date, 0, 2);
     }
 
-    public function numberToDb($number){
+    public function numberToDb($number){ // formata o número para inserir no banco de dados
         return str_replace(",", ".", $number);
     }
 }

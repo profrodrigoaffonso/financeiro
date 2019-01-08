@@ -25,3 +25,10 @@
     <?= $this->fetch('content') ?>
   </body>
 </html>
+<script type="text/javascript" src="/jquery-ui/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  $('#bt_esqueci').click(function(){
+    $('#modal_esqueci').modal();
+  });
+</script>

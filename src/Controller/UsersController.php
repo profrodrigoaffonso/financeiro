@@ -4,6 +4,9 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Utility\Security;
 
+use Cake\Mailer\Email;
+
+
 /**
  * Users Controller
  *
@@ -149,6 +152,108 @@ class UsersController extends AppController
             $session->delete("User");
         }
         return $this->redirect(["controller"=>"users","action"=>"login"]);
+
+    }
+
+    public function esqueci()
+    {
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $data = $this->request->getData();
+
+            $user = $this->Users->find()
+                ->where(['email'=>$data['email']])
+                ->first();
+
+            if($user){
+
+                //die;
+
+                $email = new Email();
+
+                $email->setFrom(["contato@profracosta.com.br" =>"contato"])
+                    ->setTransport('default')
+                    ->setTo(trim($data['email']))            
+                    ->setSubject("Esqueci a senha")
+                    ->setEmailFormat('html');
+
+                $this->loadModel('ForgotPasswords');
+                $this->ForgotPasswords->updateAll(['active'=>0],['user_id'=>$user->id]);
+
+                $uuid = uniqid();                
+
+
+                $forgot = $this->ForgotPasswords->newEntity();
+
+                $forgot->user_id = $user->id;
+                $forgot->uuid = $uuid;  
+                
+
+                $body = "<html>                
+                <body>
+                    <p>Clique no link abaixo (ou copie e cole na barra de endereço do navegador)</p>
+                    <p>http://".$_SERVER["HTTP_HOST"]."/users/redefinir_senha/{$uuid}</p>                
+                </body>
+                </html>";
+
+                if($email->send($body)){
+                    $this->ForgotPasswords->save($forgot);
+                }
+
+                $this->Flash->success("Se seu e-mail estiver cadastrado será enviado um link para redefinir a senha");
+                return $this->redirect(["controller"=>"users","action"=>"login"]);
+
+
+
+            }
+        }
+
+    }
+
+    public function redefinirSenha($uuid=null)
+    {
+
+        if(!$uuid){
+            $this->redirect(['action'=>'login']);
+        }
+
+        $this->loadModel('ForgotPasswords');
+
+        $forgot = $this->ForgotPasswords->find()
+            ->where([
+                'ForgotPasswords.uuid'=>$uuid,
+                'ForgotPasswords.active'=>1
+            ])
+            ->first();
+
+
+        if(!$forgot){
+            $this->Flash->error("Link expirado!");
+            $this->redirect(['action'=>'login']);
+        }
+
+         // debug($forgot->user['password']);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $user = $this->Users->get($forgot->user_id);
+
+            $data = $this->request->getData();
+
+            $user->password = md5($data['password']);
+            $forgot->active = 0;
+
+            $this->ForgotPasswords->save($forgot);
+            $this->Users->save($user);
+
+            $this->Flash->success("Senha redefinida");
+            $this->redirect(['action'=>'login']);
+
+
+
+        }
+
+        return $this->render("redefinir_senha","site");
 
     }
 }
