@@ -5,9 +5,9 @@
 #</IfModule>
 
 <IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteCond %{HTTPS} !=on [NC]
-	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+    RewriteEngine on    
+    #RewriteCond %{HTTPS} !=on [NC]  # Descomentar quando ter o certificado SSL
+	#RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [R,L] # Descomentar quando ter o certificado SSL
     RewriteRule    ^(\.well-known/.*)$ $1 [L]
     RewriteRule    ^$    webroot/    [L]
     RewriteRule    (.*) webroot/$1    [L]    
