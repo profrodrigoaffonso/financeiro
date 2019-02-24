@@ -2,9 +2,9 @@
 
   <?=$this->Form->create("form",["class"=>"form-signin"])?>
     <h2 class="form-signin-heading">Login</h2>
-    <label for="inputEmail" class="sr-only">Email address</label>
+    <label for="inputEmail" class="sr-only">Email</label>
     <input type="text" name="login" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
+    <label for="inputPassword" class="sr-only">Senha</label>
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <!-- <div class="checkbox">
       <label>
