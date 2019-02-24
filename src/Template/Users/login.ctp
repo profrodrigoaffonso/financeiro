@@ -1,7 +1,7 @@
 <div class="container">
 
   <?=$this->Form->create("form",["class"=>"form-signin"])?>
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-signin-heading">Login</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="text" name="login" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
