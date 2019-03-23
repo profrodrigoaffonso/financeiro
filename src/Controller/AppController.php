@@ -66,6 +66,7 @@ class AppController extends Controller
             'payments/pdf',
             'users/logout',
             'site/inserir',
+            'site/saques',
             'users/redefinirSenha',
             'site/naoAutorizado',
             'site/ajaxCalculo'

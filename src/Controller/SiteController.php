@@ -12,6 +12,43 @@ class SiteController extends AppController
         $this->getEventManager()->off($this->Csrf);
     }
 
+
+    public function saques()
+    {
+
+        $this->loadModel('Saques');
+
+        $saque = $this->Saques->newEntity();
+        if ($this->request->is('post')) {
+            $saque = $this->Saques->patchEntity($saque, $this->request->getData());
+            if ($this->Saques->save($saque)) {
+                $this->Flash->success(__('The saque has been saved.'));
+
+                return $this->redirect(['action' => 'saques']);
+            }
+            $this->Flash->error(__('The saque could not be saved. Please, try again.'));
+        }
+        $banks = $this->Saques->Banks->find('list', ['limit' => 200,'conditions'=>['correntista'=>1]]);
+
+        $count_banks = $banks;
+
+        $contador = [];
+
+        foreach ($count_banks as $key => $bk) {
+            $contador[$key]['banco'] = $bk;
+
+            $count = $this->Saques->find()->where(['bank_id'=>$key,'MONTH(created)'=>date('m')])->count();
+
+            $contador[$key]['count'] = $count;
+        }
+
+        // debug($contador);
+        $this->set(compact('saque', 'banks','contador'));
+
+        return $this->render("saques","site");
+
+    }
+
     public function inserir($uuid=null)
     {
         // é obrigatório ter o identificador do usuário
