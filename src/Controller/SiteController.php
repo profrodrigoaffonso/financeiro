@@ -42,7 +42,7 @@ class SiteController extends AppController
             if ($this->Saques->save($saque)) {
                 $this->Flash->success(__('The saque has been saved.'));
 
-                return $this->redirect(['action' => 'saques']);
+                return $this->redirect(['action' => 'saques',$uuid]);
             }
             $this->Flash->error(__('The saque could not be saved. Please, try again.'));
         }
