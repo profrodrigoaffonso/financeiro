@@ -11,7 +11,7 @@
 	<?php endforeach ?>
     <?= $this->Form->create($saque, ["autocomplete"=>"off"]) ?>
     <div class="form-group">
-        <?= $this->Form->control('bank_id', ["label"=>"Banco", 'options' => $banks, "class"=>"form-control","required"]);?>
+        <?= $this->Form->control('bank_id', ["empty"=>true,"label"=>"Banco", 'options' => $banks, "class"=>"form-control","required"]);?>
     </div>
     <div class="form-group">
         <?= $this->Form->control('value',["label"=>"Valor","class"=>"form-control","required"]);?>
