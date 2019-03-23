@@ -13,10 +13,28 @@ class SiteController extends AppController
     }
 
 
-    public function saques()
+    public function saques($uuid=null)
     {
 
+        // é obrigatório ter o identificador do usuário
+        if(!$uuid){
+            return $this->redirect(["controller"=>"site","action"=>"nao_autorizado"]);
+        }
+
+        // verifica o usuário
+        $this->loadModel("Users");
+
+        $user = $this->Users->find()
+            ->where(["uuid"=>$uuid])
+            ->first();
+
+        if(!$user){
+            return $this->redirect(["controller"=>"site","action"=>"nao_autorizado"]);
+        }
+
         $this->loadModel('Saques');
+
+
 
         $saque = $this->Saques->newEntity();
         if ($this->request->is('post')) {
