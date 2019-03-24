@@ -4,7 +4,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('bank_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('date_saque','Data de saque') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('value') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -13,7 +13,7 @@
             <?php foreach ($saques as $saque): ?>
             <tr>
                 <td><?= $saque->bank->name?></td>
-                <td><?= date('d/m/Y', strtotime(($saque->created))) ?></td>
+                <td><?= date('d/m/Y', strtotime(($saque->date_saque))) ?></td>
                 <td><?= number_format($saque->value,2,',','.') ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $saque->id]) ?>
