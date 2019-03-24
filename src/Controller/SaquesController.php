@@ -21,11 +21,26 @@ class SaquesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Banks']
+            'contain' => ['Banks'],
+            'conditions'=>[
+                'MONTH(Saques.created)' => date('m')
+            ]
         ];
         $saques = $this->paginate($this->Saques);
 
-        $this->set(compact('saques'));
+        $totais = $this->Saques->getConnection()->execute (
+            "SELECT 
+                Banks.name AS `Banks__name`, 
+                COUNT(Saques.bank_id) AS qt , 
+                SUM(Saques.value) AS valor 
+            FROM saques Saques            
+            LEFT JOIN banks Banks ON Banks.id = (Saques.bank_id) 
+            WHERE MONTH(Saques.created) = ".date('m')."
+            GROUP BY Saques.bank_id");
+
+        debug($totais);
+
+        $this->set(compact('saques','totais'));
     }
 
     /**

@@ -1,23 +1,8 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Saque[]|\Cake\Collection\CollectionInterface $saques
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Saque'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Banks'), ['controller' => 'Banks', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Bank'), ['controller' => 'Banks', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="saques index large-9 medium-8 columns content">
+<div class="container">
     <h3><?= __('Saques') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('bank_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('value') ?></th>
@@ -27,10 +12,9 @@
         <tbody>
             <?php foreach ($saques as $saque): ?>
             <tr>
-                <td><?= $this->Number->format($saque->id) ?></td>
-                <td><?= $saque->has('bank') ? $this->Html->link($saque->bank->name, ['controller' => 'Banks', 'action' => 'view', $saque->bank->id]) : '' ?></td>
-                <td><?= $this->Number->format($saque->created) ?></td>
-                <td><?= $this->Number->format($saque->value) ?></td>
+                <td><?= $saque->bank->name?></td>
+                <td><?= date('d/m/Y', strtotime(($saque->created))) ?></td>
+                <td><?= number_format($saque->value,2,',','.') ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $saque->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $saque->id]) ?>
@@ -49,5 +33,27 @@
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+    </div>
+    <div class="row">
+        <h3>Totais</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Banco</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($totais as $total) :?>
+                <tr>
+                    <td><?=$total['Banks__name']?></td>
+                    <td><?=$total['qt']?></td>
+                    <td><?=number_format($total['valor'],2,',','.')?></td>
+                </tr>
+
+            <?php endforeach;?>
+            </tbody>
+        </table>
     </div>
 </div>
