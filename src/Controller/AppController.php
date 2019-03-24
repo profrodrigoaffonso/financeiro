@@ -28,6 +28,27 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
+    public $arrMes = [
+        1 => "Janeiro",
+        2 => "Fevereiro",
+        3 => "Março",
+        4 => "Abril",
+        5 => "Maio",
+        6 => "Junho",
+        7 => "Julho",
+        8 => "Agosto",
+        9 => "Setembro",
+        10 => "Outubro",
+        11 => "Novembro",
+        12 => "Dezembro"
+    ];
+
+    public $arrAnos = [
+        2018 => '2018',
+        2019 => '2019',
+        2020 => '2020'
+    ];
+
     /**
      * Initialization hook method.
      *
@@ -99,21 +120,8 @@ class AppController extends Controller
     }
 
     public function nomeMes($mes){
-        $arrMes = [
-            1 => "Janeiro",
-            2 => "Fevereiro",
-            3 => "Março",
-            4 => "Abril",
-            5 => "Maio",
-            6 => "Junho",
-            7 => "Julho",
-            8 => "Agosto",
-            9 => "Setembro",
-            10 => "Outubro",
-            11 => "Novembro",
-            12 => "Dezembro"
-        ];
+        
 
-        return $arrMes[(int)$mes];
+        return $this->arrMes[(int)$mes];
     }
 }

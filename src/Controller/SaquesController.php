@@ -54,7 +54,10 @@ class SaquesController extends AppController
             AND Saques.user_id = {$user_id}
             GROUP BY Saques.bank_id");
 
-        $this->set(compact('saques','totais','nome_mes','ano'));
+        $meses = $this->arrMes;
+        $anos = $this->arrAnos;
+
+        $this->set(compact('saques','totais','nome_mes','mes','ano','meses','anos'));
     }
 
     /**

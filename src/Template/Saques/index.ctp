@@ -1,4 +1,9 @@
 <div class="container">
+
+    <form>
+        <?= $this->Form->control('sel-mes',['label'=>'Mês ', 'class'=>'combo-sel', 'options'=>$meses, 'value'=>(int)$mes])?>
+        <?= $this->Form->control('sel-ano',['label'=>'Ano ', 'class'=>'combo-sel','options'=>$anos, 'value'=>(int)$ano])?>
+    </form>
     <h3><?= __('Saques') ?> - <?=$nome_mes?> - <?=$ano?></h3>
     <table class="table table-hover">
         <thead>
