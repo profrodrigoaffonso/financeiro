@@ -30,12 +30,14 @@ class SaquesController extends AppController
 
         $nome_mes = $this->nomeMes($mes);
 
+        $user_id = $session->read("User")->id;
+
         $this->paginate = [
             'contain' => ['Banks'],
             'conditions'=>[
                 'MONTH(Saques.created)' => $mes,
                 'YEAR(Saques.created)' => $ano,
-                'Saques.user_id' => $session->read("User")->id
+                'Saques.user_id' => $user_id
             ]
         ];
         $saques = $this->paginate($this->Saques);
@@ -49,7 +51,7 @@ class SaquesController extends AppController
             LEFT JOIN banks Banks ON Banks.id = (Saques.bank_id) 
             WHERE MONTH(Saques.created) = {$mes}
             AND YEAR(Saques.created) = {$ano}
-            AND Saques.user_id = ".$session->read("User")->id."
+            AND Saques.user_id = {$user_id}
             GROUP BY Saques.bank_id");
 
         $this->set(compact('saques','totais','nome_mes','ano'));
