@@ -38,8 +38,6 @@ class SaquesController extends AppController
             WHERE MONTH(Saques.created) = ".date('m')."
             GROUP BY Saques.bank_id");
 
-        debug($totais);
-
         $this->set(compact('saques','totais'));
     }
 
