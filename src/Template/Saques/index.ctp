@@ -45,7 +45,13 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($totais as $total) :?>
+            <?php 
+            $soma = 0;
+            $quant = 0;
+            foreach ($totais as $total) :
+                $soma += $total['valor'];
+                $quant += $total['qt'];
+                ?>
                 <tr>
                     <td><?=$total['Banks__name']?></td>
                     <td><?=$total['qt']?></td>
@@ -53,6 +59,11 @@
                 </tr>
 
             <?php endforeach;?>
+            <tr>
+                <td><b>Totais</b></td>
+                <td><?=$quant?></td>
+                <td><?=number_format($soma,2,',','.')?></td>
+            </tr>
             </tbody>
         </table>
     </div>
