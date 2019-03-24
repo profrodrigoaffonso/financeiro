@@ -20,10 +20,12 @@ class SaquesController extends AppController
      */
     public function index()
     {
+        $session = $this->request->getSession();
         $this->paginate = [
             'contain' => ['Banks'],
             'conditions'=>[
-                'MONTH(Saques.created)' => date('m')
+                'MONTH(Saques.created)' => date('m'),
+                'Saques.user_id' => $session->read("User")->id
             ]
         ];
         $saques = $this->paginate($this->Saques);
@@ -36,6 +38,7 @@ class SaquesController extends AppController
             FROM saques Saques            
             LEFT JOIN banks Banks ON Banks.id = (Saques.bank_id) 
             WHERE MONTH(Saques.created) = ".date('m')."
+            AND Saques.user_id = ".$session->read("User")->id."
             GROUP BY Saques.bank_id");
 
         $this->set(compact('saques','totais'));
