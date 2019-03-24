@@ -13,7 +13,7 @@
             <?php foreach ($saques as $saque): ?>
             <tr>
                 <td><?= $saque->bank->name?></td>
-                <td><?= date('d/m/Y', strtotime(($saque->date_saque))) ?></td>
+                <td><?= date('d/m/Y H:i', strtotime(($saque->date_saque))) ?></td>
                 <td><?= number_format($saque->value,2,',','.') ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $saque->id]) ?>
