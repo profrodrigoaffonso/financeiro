@@ -27,6 +27,7 @@ class Saque extends Entity
      */
     protected $_accessible = [
         'bank_id' => true,
+        'user_id' => true,
         'created' => true,
         'value' => true,
         'bank' => true

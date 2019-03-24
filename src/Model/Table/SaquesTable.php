@@ -44,6 +44,10 @@ class SaquesTable extends Table
         $this->belongsTo('Banks', [
             'foreignKey' => 'bank_id'
         ]);
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
     }
 
     /**

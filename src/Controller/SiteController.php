@@ -39,6 +39,7 @@ class SiteController extends AppController
         $saque = $this->Saques->newEntity();
         if ($this->request->is('post')) {
             $saque = $this->Saques->patchEntity($saque, $this->request->getData());
+            $saque->user_id = $user->id;
             if ($this->Saques->save($saque)) {
                 $this->Flash->success(__('The saque has been saved.'));
 
