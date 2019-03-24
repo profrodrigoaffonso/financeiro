@@ -18,13 +18,17 @@ class SaquesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-    public function index()
+    public function index($mes=null)
     {
         $session = $this->request->getSession();
+
+        if(!$mes)
+            $mes = date('m');
+
         $this->paginate = [
             'contain' => ['Banks'],
             'conditions'=>[
-                'MONTH(Saques.created)' => date('m'),
+                'MONTH(Saques.created)' => $mes,
                 'Saques.user_id' => $session->read("User")->id
             ]
         ];
@@ -37,7 +41,7 @@ class SaquesController extends AppController
                 SUM(Saques.value) AS valor 
             FROM saques Saques            
             LEFT JOIN banks Banks ON Banks.id = (Saques.bank_id) 
-            WHERE MONTH(Saques.created) = ".date('m')."
+            WHERE MONTH(Saques.created) = ".$mes."
             AND Saques.user_id = ".$session->read("User")->id."
             GROUP BY Saques.bank_id");
 
