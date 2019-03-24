@@ -29,6 +29,8 @@ class Saque extends Entity
         'bank_id' => true,
         'user_id' => true,
         'created' => true,
+        'date_saque' => true,
+        'hour_saque' => true,
         'value' => true,
         'bank' => true
     ];
