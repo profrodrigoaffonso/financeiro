@@ -38,6 +38,9 @@ class SaquesController extends AppController
                 'MONTH(Saques.created)' => $mes,
                 'YEAR(Saques.created)' => $ano,
                 'Saques.user_id' => $user_id
+            ],
+            'order' => [
+                'id' => 'DESC'
             ]
         ];
         $saques = $this->paginate($this->Saques);
