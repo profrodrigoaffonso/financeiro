@@ -4,12 +4,38 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
 
+use Cake\Mailer\Email;
+
 class SiteController extends AppController
 {
 
     public function beforeFilter(Event $event)
     {
         $this->getEventManager()->off($this->Csrf);
+    }
+
+    public function resumo(){
+
+        $session = $this->request->getSession();
+
+        $email = new Email();
+
+        $email->setFrom(["contato@profracosta.com.br" =>"contato"])
+            ->setTransport('default')
+            ->setTo(trim('profrodrigoaffonso@gmail.com','Rodrigo'))            
+            ->setSubject("Resumo do dia")
+            ->setEmailFormat('html');
+
+        $body = '<html>        
+        <body>
+        <p>Resumo</p>
+        </body>
+        </html>';
+
+
+        $email->send($body);
+
+        die;
     }
 
 

@@ -5,7 +5,7 @@
  */
 ?>
 
-<div class="payments index large-12 medium-10 columns content">
+<div class="container">
     <h3><?= __('Payments') ?></h3>
     <?=$this->Form->create()?>
     De: <input type="text" name="de" class="dt" autocomplete="off"> Até: <input type="text" name="ate" class="dt" autocomplete="off">
