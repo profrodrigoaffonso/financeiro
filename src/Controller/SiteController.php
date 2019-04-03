@@ -33,7 +33,8 @@ class SiteController extends AppController
             ->where([
                 'date_payment >='=>date('Y-m-d').' 00:00:00',
                 'date_payment <='=>date('Y-m-d').' 23:59:59'
-            ]);
+            ])
+            ->order(['date_payment'=>'ASC']);
 
         //debug($payments);
 
@@ -51,16 +52,20 @@ $table = "<table style=\"height: 31px; margin-left: auto; margin-right: auto;\" 
         <tr>
         <td style=\"width: 188.667px; text-align: center;background-color: #99cc00;\"><b>CATEGORIA</b></td>
         <td style=\"width: 188.667px; text-align: center;background-color: #99cc00;\"><b>VALOR</b></td>
+        <td style=\"width: 188.667px; text-align: center;background-color: #99cc00;\"><b>Data e Hora</b></td>
         <td style=\"width: 188.667px; text-align: center;background-color: #99cc00;\"><b>OBS</b></td>
         </tr>";
 
-
+        $total = 0;
 
         foreach ($payments as $payment) {
+
+            $total += $payment->value;
 
             $table .= "<tr>
                             <td align=\"center\">".$payment->category->name."</td>
                             <td align=\"center\">".number_format($payment->value,2,',','.')."</td>
+                            <td align=\"center\">".date('d-m-Y H:i', strtotime($payment->date_payment))."</td>
                             <td align=\"center\">{$payment->obs}</td>
                        </tr>";
             
@@ -72,6 +77,7 @@ $table = "<table style=\"height: 31px; margin-left: auto; margin-right: auto;\" 
         <body>
         <h3 style=\"text-align: center;\">RESUMO DO DIA</h3>
         {$table}
+        <p>Total: R$ ".number_format($total,2,',','.')."</p>
         </body>
         </html>";
 
