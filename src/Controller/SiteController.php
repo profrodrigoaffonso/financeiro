@@ -26,11 +26,44 @@ class SiteController extends AppController
             ->setSubject("Resumo do dia")
             ->setEmailFormat('html');
 
-        $body = '<html>        
+        $this->loadModel('Payments');
+
+        $payments = $this->Payments->find()
+            ->contain(['Categories','FormPayments'])
+            ->where([
+                'date_payment >='=>date('Y-m-d').' 00:00:00',
+                'date_payment <='=>date('Y-m-d').' 23:59:59'
+            ]);
+
+        //debug($payments);
+
+        $table = "<table style=\"width: 100%\">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                    <th>Obs</th>
+                </tr>";
+
+        foreach ($payments as $payment) {
+
+            $table .= "<tr>
+                            <td align=\"center\">".$payment->category->name."</td>
+                            <td align=\"center\">".number_format($payment->value,2,',','.')."</td>
+                            <td align=\"center\">{$payment->obs}</td>
+                       </tr>";
+            
+        }
+
+        $table .= "</table>";
+
+        $body = "<html>        
         <body>
         <p>Resumo</p>
+        {$table}
         </body>
-        </html>';
+        </html>";
+
+        //echo $body;
 
 
         $email->send($body);
