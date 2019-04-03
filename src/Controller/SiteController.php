@@ -44,6 +44,18 @@ class SiteController extends AppController
                     <th>Obs</th>
                 </tr>";
 
+
+
+$table = "<table style=\"height: 31px; margin-left: auto; margin-right: auto;\" border=\"1\" width=\"588\" cellspacing=\"0\" cellpadding=\"0\">
+        <tbody>
+        <tr>
+        <td style=\"width: 188.667px; text-align: center;background-color: #99cc00;\"><b>CATEGORIA</b></td>
+        <td style=\"width: 188.667px; text-align: center;background-color: #99cc00;\"><b>VALOR</b></td>
+        <td style=\"width: 188.667px; text-align: center;background-color: #99cc00;\"><b>OBS</b></td>
+        </tr>";
+
+
+
         foreach ($payments as $payment) {
 
             $table .= "<tr>
@@ -54,16 +66,16 @@ class SiteController extends AppController
             
         }
 
-        $table .= "</table>";
+        $table .= "</tbody></table>";
 
         $body = "<html>        
         <body>
-        <p>Resumo</p>
+        <h3 style=\"text-align: center;\">RESUMO DO DIA</h3>
         {$table}
         </body>
         </html>";
 
-        //echo $body;
+        // echo $body; die;
 
 
         $email->send($body);
