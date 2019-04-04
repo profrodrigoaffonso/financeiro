@@ -60,7 +60,7 @@ $table = "<table style=\"height: 31px; margin-left: auto; margin-right: auto;\" 
 
         foreach ($payments as $payment) {
 
-            $total += $payment->value;
+            $total += $payment->value; 
 
             $table .= "<tr>
                             <td align=\"center\">".$payment->category->name."</td>
