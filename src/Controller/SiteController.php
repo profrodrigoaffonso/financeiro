@@ -65,7 +65,7 @@ $table = "<table style=\"height: 31px; margin-left: auto; margin-right: auto;\" 
             $table .= "<tr>
                             <td align=\"center\">".$payment->category->name."</td>
                             <td align=\"center\">".number_format($payment->value,2,',','.')."</td>
-                            <td align=\"center\">".date('d-m-Y H:i', strtotime($payment->date_payment))."</td>
+                            <td align=\"center\">".date('d/m/Y H:i', strtotime($payment->date_payment))."</td>
                             <td align=\"center\">{$payment->obs}</td>
                        </tr>";
             
