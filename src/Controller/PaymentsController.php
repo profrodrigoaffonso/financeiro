@@ -182,18 +182,22 @@ class PaymentsController extends AppController
 
             $i = 2;
 
-            $cat_ant = 0;
+            $cat_ant = 1;
 
             foreach ($payments as $key => $payment) {
                 //debug($payment->category->name);
                //echo $payment->category->name;
+                if($cat_ant != $payment->category->id)
+                    $i++;
 
                 $sheet->setCellValueByColumnAndRow(1, $i, $payment->category->name);
                 $sheet->setCellValueByColumnAndRow(2, $i, $payment->value);
                 $sheet->setCellValueByColumnAndRow(3, $i, $payment->form_payment->name);
                 $sheet->setCellValueByColumnAndRow(4, $i, date("d/m/Y", strtotime($payment->date_payment)));
                 $sheet->setCellValueByColumnAndRow(5, $i, date("H:i", strtotime($payment->date_payment)));
-                $sheet->setCellValueByColumnAndRow(6, $i, $payment->obs);              
+                $sheet->setCellValueByColumnAndRow(6, $i, $payment->obs); 
+
+                $cat_ant = $payment->category->id;         
 
                 $i++;
             }

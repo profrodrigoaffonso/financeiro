@@ -10,7 +10,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Saque[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class SaquesController extends AppController
+class SaquesController extends AppController 
 {
 
     /**
