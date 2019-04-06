@@ -187,8 +187,10 @@ class PaymentsController extends AppController
             foreach ($payments as $key => $payment) {
                 //debug($payment->category->name);
                //echo $payment->category->name;
-                if($cat_ant != $payment->category->id)
+                if($cat_ant != $payment->category->id){
+                    $sheet->setCellValueByColumnAndRow(1, $i, "Total");
                     $i++;
+                }
 
                 $sheet->setCellValueByColumnAndRow(1, $i, $payment->category->name);
                 $sheet->setCellValueByColumnAndRow(2, $i, $payment->value);
@@ -201,6 +203,8 @@ class PaymentsController extends AppController
 
                 $i++;
             }
+
+            $sheet->setCellValueByColumnAndRow(1, $i, "Total");
 
             $writer = new Xlsx($spreadsheet);
 
