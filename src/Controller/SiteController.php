@@ -20,6 +20,10 @@ class SiteController extends AppController
 
         $email = new Email();
 
+        $data_verif = date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d'))));
+
+        // die($data_verif);
+
         $email->setFrom(["contato@profracosta.com.br" =>"contato"])
             ->setTransport('default')
             ->setTo(trim('profrodrigoaffonso@gmail.com','Rodrigo'))            
@@ -31,8 +35,8 @@ class SiteController extends AppController
         $payments = $this->Payments->find()
             ->contain(['Categories','FormPayments'])
             ->where([
-                'date_payment >='=>date('Y-m-d').' 00:00:00',
-                'date_payment <='=>date('Y-m-d').' 23:59:59'
+                'date_payment >='=>$data_verif.' 00:00:00',
+                'date_payment <='=>$data_verif.' 23:59:59'
             ])
             ->order(['date_payment'=>'ASC']);
 
