@@ -22,7 +22,7 @@ class SiteController extends AppController
 
         $data_verif = date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d'))));
 
-        // die($data_verif);
+        die(date('Y-m-d H:i'));
 
         $email->setFrom(["contato@profracosta.com.br" =>"contato"])
             ->setTransport('default')
