@@ -14,12 +14,13 @@
     <?php
     if(!empty($payments)):
     ?>
-    <table cellpadding="0" cellspacing="0">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('value') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('form_payment_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('category_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('obs') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_payment') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -27,9 +28,10 @@
         <tbody>
             <?php foreach ($payments as $payment): ?>
             <tr>
-                <td><?= $this->Number->format($payment->value) ?></td>
+                <td><?= number_format($payment->value,2,',','.') ?></td>
                 <td><?= $payment->form_payment->name ?></td>
                 <td><?= $payment->category->name?></td>
+                <td><?= $payment->obs?></td>
                 <td><?= h(date("d/m/Y H:i", strtotime($payment->date_payment))) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $payment->id]) ?>
