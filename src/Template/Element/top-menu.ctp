@@ -15,6 +15,7 @@
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/payments/export">Exportar</a></li>
             <li><a href="/banks">Bancos</a></li>
+            <li><a href="/payments">Pagamentos</a></li>
             <li><a href="/saques">Saques</a></li>
             <li><a href="/payments/qrcode">QRcode</a></li>
             <!-- <li><a href="#contact">Contact</a></li> -->
