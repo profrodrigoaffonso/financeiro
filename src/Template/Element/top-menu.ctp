@@ -17,7 +17,7 @@
             <li><a href="/banks">Bancos</a></li>
             <li><a href="/payments">Pagamentos</a></li>
             <li><a href="/saques">Saques</a></li>
-            <li><a href="/payments/qrcode">QRcode</a></li> 
+            <li><a href="/payments/qrcode">QRcode</a></li>  
             <!-- <li><a href="#contact">Contact</a></li> -->
             <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
