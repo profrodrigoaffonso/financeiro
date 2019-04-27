@@ -183,12 +183,13 @@ class PaymentsController extends AppController
             $i = 2;
 
             $cat_ant = 1;
+            $nome_ant = "";
 
             foreach ($payments as $key => $payment) {
                 //debug($payment->category->name);
                //echo $payment->category->name;
                 if($cat_ant != $payment->category->id){
-                    $sheet->setCellValueByColumnAndRow(1, $i, "");
+                    $sheet->setCellValueByColumnAndRow(1, $i, $nome_ant);
                     $i++;
                 }
 
@@ -199,12 +200,13 @@ class PaymentsController extends AppController
                 $sheet->setCellValueByColumnAndRow(5, $i, date("H:i", strtotime($payment->date_payment)));
                 $sheet->setCellValueByColumnAndRow(6, $i, $payment->obs); 
 
-                $cat_ant = $payment->category->id;         
+                $cat_ant = $payment->category->id; 
+                $nome_ant =  $payment->category->name;      
 
                 $i++;
             }
 
-            $sheet->setCellValueByColumnAndRow(1, $i, "");
+            $sheet->setCellValueByColumnAndRow(1, $i, $nome_ant);
 
             $writer = new Xlsx($spreadsheet);
 
