@@ -14,6 +14,41 @@ class SiteController extends AppController
         $this->getEventManager()->off($this->Csrf);
     }
 
+
+    public function req()
+    {
+
+        $jsonData = $this->request->input('json_decode');
+        $this->loadModel("Categories");
+        $this->loadModel("FormPayments");
+        $this->loadModel('Payments');
+        $category = $this->Categories->find()
+            ->where([
+                "name"=>$jsonData->categoria
+            ])
+            ->first();
+
+        $form_payment = $this->FormPayments->find()
+            ->where([
+                "name"=>$jsonData->forma_pagamento
+            ])
+            ->first();
+
+        $payment = $this->Payments->newEntity();
+        $payment->user_id = 1;
+        $payment->value = $jsonData->valor;
+        $payment->form_payment_id = $form_payment->id;
+        $payment->category_id = $category->id;
+        $payment->date_payment = date('Y-m-d H:i');
+        $payment->obs = $jsonData->obs;
+        $this->Payments->save($payment);
+        
+
+        echo "Valor inserido com sucesso!";
+        die();
+
+    }
+
     public function resumo(){
 
         $session = $this->request->getSession();

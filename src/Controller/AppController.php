@@ -88,6 +88,7 @@ class AppController extends Controller
             'users/logout',
             'site/inserir',
             'site/saques',
+            'site/req',
             'users/redefinirSenha',
             'site/naoAutorizado',
             'site/ajaxCalculo',
