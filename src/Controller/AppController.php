@@ -92,6 +92,7 @@ class AppController extends Controller
             'users/redefinirSenha',
             'site/naoAutorizado',
             'site/ajaxCalculo',
+            'site/index',
             'site/resumo'
         ];
 

@@ -24,7 +24,7 @@
             <?=$this->Form->control("hour_saque",["label"=>"Hora","value"=>date("H:i"),"class"=>"form-control","required","autocomplete"=>"off"])?>
         </div>
 
-      </div><br><br>
-    <?= $this->Form->button(__('Salvar')) ?>
+      </div><br><br><br><br>
+      <button type="submit" class="btn btn-default btn-primary" id="inserir">Salvar</button>
     <?= $this->Form->end() ?>
 </div>

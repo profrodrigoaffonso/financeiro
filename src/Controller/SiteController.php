@@ -128,6 +128,10 @@ $table = "<table style=\"height: 31px; margin-left: auto; margin-right: auto;\" 
         die;
     }
 
+    public function index()
+    {
+        return $this->render("index","site");
+    }
 
     public function saques($uuid=null)
     {
