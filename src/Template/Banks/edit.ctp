@@ -25,6 +25,8 @@
         <?php
             echo $this->Form->control('code');
             echo $this->Form->control('name');
+            echo $this->Form->control('agency');
+            echo $this->Form->control('account');
             echo $this->Form->control('correntista');
         ?>
     </fieldset>

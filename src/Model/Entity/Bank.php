@@ -28,6 +28,8 @@ class Bank extends Entity
     protected $_accessible = [
         'code' => true,
         'name' => true,
+        'agency' => true,
+        'account' => true,
         'correntista' => true,
         'saques' => true
     ];
