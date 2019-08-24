@@ -5,6 +5,8 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('code','Código') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name','Banco') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('agency','Agência') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('account','Conta') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('correntista') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -14,6 +16,8 @@
             <tr>
                 <td><?= h($bank->code) ?></td>
                 <td><?= h($bank->name) ?></td>
+                <td><?= h($bank->agency) ?></td>
+                <td><?= h($bank->account) ?></td>
                 <td><?= ($bank->correntista==1?"Sim":"Não") ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $bank->id]) ?>
