@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController; 
+use App\Controller\AppController; //teste
 
 /**
  * Categories Controller
