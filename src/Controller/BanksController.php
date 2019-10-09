@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Banks Controller
+ * Banks Controller 
  *
  * @property \App\Model\Table\BanksTable $Banks
  *
