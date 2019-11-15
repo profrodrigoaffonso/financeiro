@@ -93,7 +93,8 @@ class AppController extends Controller
             'site/naoAutorizado',
             'site/ajaxCalculo',
             'site/index',
-            'site/resumo'
+            'site/resumo' 
+            
         ];
 
         // verifica a página atual
