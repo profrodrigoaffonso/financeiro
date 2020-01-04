@@ -10,6 +10,7 @@
 	  <div class="form-group">
 	  	<?=$this->Form->control("value",["label"=>"Valor","class"=>"form-control","required"])?>
 	  </div>
+	  <div class="row">
 	  <div class="form-group">
 	  	<div class=col-xs-6 style="margin-left: 0px;">
 	  		<?=$this->Form->control("date_payment",["label"=>"Data","value"=>date("d/m/Y"),"class"=>"form-control","required","autocomplete"=>"off","readonly"])?>
@@ -18,6 +19,7 @@
 	  		<?=$this->Form->control("hour_payment",["label"=>"Hora","value"=>date("H:i"),"class"=>"form-control","required","autocomplete"=>"off"])?>
 	  	</div>
 
+	  </div>
 	  </div><br><br>
 	  <div class="form-group">
 	  	<?=$this->Form->control("obs",["type"=>"textarea", "label"=>"Obs","class"=>"form-control"])?>
