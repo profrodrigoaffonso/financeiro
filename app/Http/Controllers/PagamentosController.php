@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Categorias;
 use App\Models\FormaPagamentos;
@@ -10,6 +11,7 @@ use App\Models\Pagamentos;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class PagamentosController extends Controller
 {
@@ -95,10 +97,9 @@ class PagamentosController extends Controller
             '12' => 'Dezembro'
         ];
 
-        $anos = [
-            '2023'
-        ];
+        $anos = Pagamentos::select(DB::raw('GROUP_CONCAT(DISTINCT(YEAR(data_hora))) AS anos'))->first();
 
+        $anos = explode(',', $anos->anos);
 
         return view('pagamentos.exportar', compact('meses', 'anos'));
 
@@ -165,12 +166,12 @@ class PagamentosController extends Controller
 
         $writer = new Xlsx($spreadsheet);
 
-        $file = "excel/".uniqid().".xlsx";
+        $file = "excel/".sha1(uniqid()).".xlsx";
         $writer->save($file);
 
         $headers = ['Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
-        return response()->download($file, 'Export.xlsx', $headers);
+        return response()->download($file, 'Export.xlsx', $headers)->deleteFileAfterSend(true);
 
     }
 
@@ -179,7 +180,82 @@ class PagamentosController extends Controller
         return view('app.upload');
     }
 
+    public function lerExcel()
+    {
+        $caminhoArquivo = 'excel/exemplo.xlsx';
+
+        // Carrega o arquivo
+        $spreadsheet = IOFactory::load($caminhoArquivo);
+
+        // Pega a primeira aba ativa
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Lê todas as linhas como array
+        $dados = $sheet->toArray();
+
+        // Exibe (para testar)
+        dd($dados);
+    }
+
     public function storeUpload(Request $request)
+    {
+        $arquivo = $request->file('arquivo');
+
+        $nome = uniqid() . '.xlsx';
+
+        // dd($arquivo->getPathname());
+
+        if (move_uploaded_file($arquivo->getPathname(), 'uploads/' . $nome)) {
+            //echo "Arquivo válido e enviado com sucesso.\n";
+
+            // Carrega o arquivo
+            $spreadsheet = IOFactory::load('uploads/' . $nome);
+
+            // Pega a primeira aba ativa
+            $sheet = $spreadsheet->getActiveSheet();
+
+            // Lê todas as linhas como array
+            $dados = $sheet->toArray();
+
+            $categorias = Categorias::pluck('id', 'nome')->toArray();
+            $forma_pagamentos = FormaPagamentos::pluck('id', 'nome')->toArray();
+
+            unset($dados[0]);
+
+            foreach($dados as $row){
+
+                // $categoria = Categorias::select('id')->where('nome', $row[0])->first();
+                // $forma = FormaPagamentos::select('id')->where('nome', $row[2])->first();
+
+                $categoria_id = $categorias[$row[0]];
+                $forma_pagamento_id = $forma_pagamentos[$row[2]];
+
+                // dd($categoria);
+
+                $verificar = Pagamentos::where('data_hora', $this->dataDB($row[3]))->first();
+
+                if(!$verificar){
+                    Pagamentos::create([
+                        'categoria_id'          => $categoria_id,
+                        'forma_pagamento_id'    => $forma_pagamento_id,
+                        'valor'                 => str_replace(',', '.', $row[1]),
+                        'data_hora'             => $this->dataDB($row[3])
+                    ]);
+                }
+
+
+            }
+
+            unlink('uploads/' . $nome);
+
+            return redirect(route('pagamentos.upload'));
+
+        } else {
+            echo "Possível ataque de upload de arquivo!\n";
+        }
+    }
+
+    public function storeUploadold(Request $request)
     {
         $arquivo = $request->file('arquivo');
 
@@ -191,6 +267,7 @@ class PagamentosController extends Controller
             //echo "Arquivo válido e enviado com sucesso.\n";
 
             $csv = array_map('str_getcsv', file('uploads/' . $nome));
+            // dd($csv);
             unset($csv[0]);
 
             foreach($csv as $row){

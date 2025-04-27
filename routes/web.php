@@ -41,8 +41,7 @@ Route::get('/app', function () {
 // Route::post('/login', 'Auth\LoginController@login')->name('login.login');
 // Route::get('/logout', 'Auth\LoginController@logout')->name('login.logout');
 Route::get('/inserir', [PagamentosController::class, 'inserir'])->name('pagamentos.inserir');
-// Route::get('/upload', 'PagamentosController@upload')->name('pagamentos.upload');
-// Route::post('/store-upload', 'PagamentosController@storeUpload')->name('pagamentos.upload.store');
+Route::get('/ler', [PagamentosController::class, 'lerExcel']);
 Route::get('/saques', [SaquesController::class, 'inserir'])->name('saques.inserir');
 // Route::post('/saques-salvar', 'SaquesController@salvar')->name('saques.salvar');
 Route::post('/salvar', [PagamentosController::class, 'salvar'])->name('pagamentos.salvar');
@@ -65,6 +64,8 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/', function () {
         return view('home');
     })->name('admin.home');
+
+
 
     Route::prefix('bancos')->group(function () {
         Route::get('/', [BancosController::class, 'index'])->name('bancos.index');
@@ -97,6 +98,9 @@ Route::prefix('admin')->middleware('auth')->group(function(){
         Route::post('/store', [PagamentosController::class, 'store'])->name('pagamentos.store');
         Route::get('/exportar', [PagamentosController::class, 'exportar'])->name('pagamentos.exportar');
         Route::post('/exec-exportar', [PagamentosController::class, 'execExportar'])->name('pagamentos.exec-exportar');
+        Route::get('/upload', [PagamentosController::class, 'upload'])->name('pagamentos.upload');
+        Route::post('/store-upload', [PagamentosController::class, 'storeUpload'])->name('pagamentos.upload.store');
+
     });
 
 });
