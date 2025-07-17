@@ -22,6 +22,8 @@ Um aplicativo web para fiananças pessoais .
 
 ## Estrutura do projeto
 
+```text
+
 app/
 ├── Http/
 │ └── Controllers/
