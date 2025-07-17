@@ -27,18 +27,18 @@ Um aplicativo web para fiananças pessoais .
 app/
 ├── Http/
 │ └── Controllers/
-│ └── BancosController.php
-| └── CategoriasController.php
-| └── FormaPagamentosController.php
-| └── LoginController.php
-| └── PagamentosController.php| 
+│   ├──  BancosController.php
+|   ├── CategoriasController.php
+|   ├── FormaPagamentosController.php
+|   ├── LoginController.php
+|   └── PagamentosController.php| 
 ├── Models/
-│ └── Bancos.php
-│ └── Categorias.php
-│ └── FormaPagamentos.php
-│ └── Pagamentos.php
-│ └── Saques.php
+│ ├── Bancos.php
+│ ├── Categorias.php
+│ ├── FormaPagamentos.php
+│ ├── Pagamentos.php
+│ ├── Saques.php
 │ └── User.php
 routes/
-└── api.php
+├──  api.php
 └── web.php
