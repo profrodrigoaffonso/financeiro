@@ -31,7 +31,7 @@ app/
 |   ├── CategoriasController.php
 |   ├── FormaPagamentosController.php
 |   ├── LoginController.php
-|   └── PagamentosController.php| 
+|   └── PagamentosController.php
 ├── Models/
 │ ├── Bancos.php
 │ ├── Categorias.php
